@@ -92,9 +92,9 @@ cdef class Event:
                         Default to True.
             <others>: the properties will be set on the created event
         '''
-        if not args and not kwargs:
+        #if not args and not kwargs:
             # For pickling
-            return
+        #    return
         cdef tuple indicesNames = self.indicesNames()
         cdef str k
         if kwargs and not args:

@@ -885,7 +885,7 @@ cdef class CBQueue(_SubQueue):
         readonly _SubQueue defaultQueue
         int totalSize
         int maxtotal
-        dict blockEvents
+        readonly dict blockEvents
         bint isWaited
         bint isWaitEmpty
         int outputStat
