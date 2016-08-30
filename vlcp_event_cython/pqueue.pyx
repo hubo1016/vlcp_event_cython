@@ -193,7 +193,7 @@ cdef class _FifoQueue(_SubQueue):
         self.queue.clear()
         if self.isWaited and self.canAppend():
             self.isWaited = False
-            return (QueueCanWriteEvent(self), [])
+            return ([QueueCanWriteEvent(self)], [])
         else:
             return ([], [])
     def __len__(self):
