@@ -866,6 +866,7 @@ cdef class _AutoClassQueue(_SubQueue):
 
 cdef allSubqueues(set subqueues, CBQueue q):
     subqueues.add(q)
+    subqueues.add(q.defaultQueue)
     cdef list v
     for v in q.queueindex.values():
         if len(v) == 3:
@@ -893,6 +894,7 @@ cdef class CBQueue(_SubQueue):
         self.queues = {}
         self.queueindex = {}
         self.prioritySet = []
+        self.blockEvents = {}
     def __init__(self, MatchTree tree = None, _MultiQueue parent = None, maxdefault = None, maxtotal = None, defaultQueueClass = _FifoQueue, int defaultQueuePriority = 0):
         '''
         Constructor
@@ -911,7 +913,6 @@ cdef class CBQueue(_SubQueue):
         self.totalSize = 0
         self.maxtotal = -1 if maxtotal is None else <int?>maxtotal
         self.blocked = True
-        self.blockEvents = {}
         self.isWaited = False
         self.isWaitEmpty = False
         self.outputStat = 0
@@ -980,7 +981,6 @@ cdef class CBQueue(_SubQueue):
         '''
         cdef set subqueues = set()
         allSubqueues(subqueues, queue)
-        cdef CBQueue v
         events = [k for k,v in self.blockEvents.items() if v in subqueues]
         for e in events:
             del self.blockEvents[e]
