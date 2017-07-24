@@ -12,7 +12,7 @@ except:
 from setuptools import setup
 from distutils.extension import Extension
 
-VERSION = '0.1.4'
+VERSION = '0.1.5'
 
 import sys
 if 'setuptools.extension' in sys.modules:

@@ -98,7 +98,7 @@ cdef class MatchTree:
             return
         cdef tuple t
         cdef MatchTree p
-        current._matchers[:] = [t for t in current._matchers if t[1] is not obj]
+        current._matchers[:] = [t for t in current._matchers if t[0] is not matcher and t[1] is not obj]
         while not current._matchers and current._any is None \
                 and not current._index and current.parent is not None:
             # remove self from parents
